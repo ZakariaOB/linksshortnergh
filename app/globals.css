@@ -10,10 +10,9 @@
 }
 
 :root {
+  /* Light mode defaults */
   --background: #ffffff;
   --foreground: #171717;
-  
-  /* shadcn/ui CSS variables for Clerk theme */
   --card: #ffffff;
   --card-foreground: #171717;
   --primary: #171717;
@@ -30,11 +29,10 @@
   --font-weight-semibold: 600;
 }
 
+/* Dark mode when .dark class is present */
 .dark {
   --background: #0a0a0a;
   --foreground: #ededed;
-  
-  /* shadcn/ui CSS variables for dark mode */
   --card: #18181b;
   --card-foreground: #fafafa;
   --primary: #fafafa;
@@ -46,12 +44,11 @@
   --ring: #d4d4d8;
 }
 
+/* Dark mode when system preference is dark (fallback) */
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
-    
-    /* shadcn/ui CSS variables for dark mode (when system prefers dark) */
     --card: #18181b;
     --card-foreground: #fafafa;
     --primary: #fafafa;
