@@ -9,6 +9,8 @@ import {
   UserButton,
 } from "@clerk/nextjs";
 import "./globals.css";
+import { ThemeProvider } from "./components/theme-provider";
+import { ThemeToggle } from "./components/theme-toggle";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,10 +34,11 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html lang="en">
+      <html lang="en" suppressHydrationWarning>
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
+          <ThemeProvider>
           <header className="sticky top-0 z-50 border-b border-zinc-200 bg-white/80 backdrop-blur-lg dark:border-zinc-800 dark:bg-zinc-900/80">
             <div className="container mx-auto flex h-16 items-center justify-between px-4">
               <div className="flex items-center gap-2">
@@ -45,6 +48,7 @@ export default function RootLayout({
                 <span className="text-xl font-bold text-zinc-900 dark:text-zinc-50">LinkShort</span>
               </div>
               <div className="flex items-center gap-4">
+                <ThemeToggle />
                 <SignedOut>
                   <SignInButton mode="modal">
                     <button className="text-sm font-medium text-zinc-700 transition-colors hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-zinc-50">
@@ -64,6 +68,7 @@ export default function RootLayout({
             </div>
           </header>
           {children}
+          </ThemeProvider>
         </body>
       </html>
     </ClerkProvider>
