@@ -2,44 +2,45 @@
 
 import { createContext, useContext, useEffect, useState } from 'react';
 
-type Theme = 'light' | 'dark';
+type Theme = 'light' | 'dark' | 'system';
 
-type ThemeContextType = {
+interface ThemeContextType {
   theme: Theme;
-  toggleTheme: () => void;
-};
+  setTheme: (theme: Theme) => void;
+}
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>('light');
+  const [theme, setTheme] = useState<Theme>(() => {
+    // Initialize theme from localStorage on first render (client-only)
+    if (typeof window !== 'undefined') {
+      const stored = localStorage.getItem('theme') as Theme | null;
+      return stored || 'system';
+    }
+    return 'system';
+  });
 
   useEffect(() => {
-    // Check localStorage for saved theme preference
-    const savedThemeValue = localStorage.getItem('theme');
-    const isValidTheme = savedThemeValue === 'light' || savedThemeValue === 'dark';
-    
-    if (isValidTheme) {
-      setTheme(savedThemeValue);
-      document.documentElement.classList.toggle('dark', savedThemeValue === 'dark');
-    } else {
-      // Check system preference
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const systemTheme = prefersDark ? 'dark' : 'light';
-      setTheme(systemTheme);
-      document.documentElement.classList.toggle('dark', systemTheme === 'dark');
-    }
-  }, []);
+    const root = document.documentElement;
+    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches
+      ? 'dark'
+      : 'light';
 
-  const toggleTheme = () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light';
-    setTheme(newTheme);
-    localStorage.setItem('theme', newTheme);
-    document.documentElement.classList.toggle('dark', newTheme === 'dark');
-  };
+    const activeTheme = theme === 'system' ? systemTheme : theme;
+
+    // Remove dark class if theme is light, add it if theme is dark
+    if (activeTheme === 'dark') {
+      root.classList.add('dark');
+    } else {
+      root.classList.remove('dark');
+    }
+
+    localStorage.setItem('theme', theme);
+  }, [theme]);
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider value={{ theme, setTheme }}>
       {children}
     </ThemeContext.Provider>
   );
