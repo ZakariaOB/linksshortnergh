@@ -1,0 +1,7 @@
+{
+  "WhiteSource Advise.Diff.BaseBranch": "master",
+  "accessibility.signals.chatRequestSent": { "sound": "off" },
+  "accessibility.signals.chatResponseReceived": { "sound": "off" },
+  "accessibility.signals.chatUserActionRequired": { "sound": "off" },
+  "accessibility.signals.chatEditModifiedFile": { "sound": "off" }
+}
