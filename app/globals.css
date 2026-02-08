@@ -12,12 +12,55 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  
+  /* shadcn/ui CSS variables for Clerk theme */
+  --card: #ffffff;
+  --card-foreground: #171717;
+  --primary: #171717;
+  --primary-foreground: #fafafa;
+  --muted: #f4f4f5;
+  --muted-foreground: #71717a;
+  --destructive: #ef4444;
+  --input: #e4e4e7;
+  --ring: #171717;
+  
+  /* Font weights */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+}
+
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  
+  /* shadcn/ui CSS variables for dark mode */
+  --card: #18181b;
+  --card-foreground: #fafafa;
+  --primary: #fafafa;
+  --primary-foreground: #18181b;
+  --muted: #27272a;
+  --muted-foreground: #a1a1aa;
+  --destructive: #dc2626;
+  --input: #27272a;
+  --ring: #d4d4d8;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    
+    /* shadcn/ui CSS variables for dark mode (when system prefers dark) */
+    --card: #18181b;
+    --card-foreground: #fafafa;
+    --primary: #fafafa;
+    --primary-foreground: #18181b;
+    --muted: #27272a;
+    --muted-foreground: #a1a1aa;
+    --destructive: #dc2626;
+    --input: #27272a;
+    --ring: #d4d4d8;
   }
 }
 
