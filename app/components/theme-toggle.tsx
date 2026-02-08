@@ -12,7 +12,7 @@ export function ThemeToggle() {
       aria-label="Toggle theme"
     >
       {theme === 'light' ? (
-        // Moon icon for dark mode
+        // Moon icon - click to switch to dark mode
         <svg
           className="h-5 w-5"
           fill="none"
@@ -27,7 +27,7 @@ export function ThemeToggle() {
           />
         </svg>
       ) : (
-        // Sun icon for light mode
+        // Sun icon - click to switch to light mode
         <svg
           className="h-5 w-5"
           fill="none"
